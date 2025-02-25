@@ -16,17 +16,17 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 console.log("Server directory:", __dirname);
-console.log("Serving static files from:", path.join(__dirname, '../client/dist'));
+console.log("Serving static files from:", path.join(__dirname, '../frontend/dist'));
 
 app.use(cors());
 app.use(express.json());
 
-app.use(express.static(path.join(__dirname, '../client/dist')));
+app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
 app.use('/api/words', wordController);
 
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/dist', 'index.html'));
+    res.sendFile(path.join(__dirname, '../frontend/dist', 'index.html'));
 });
 
 app.listen(PORT, () => {
