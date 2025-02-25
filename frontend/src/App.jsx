@@ -56,9 +56,9 @@ const Game = () => {
         return (
             <div className="grid">
                 {state.grid.map((row, i) => (
-                    <div key={i} className="grid-row">
+                    <div key={`row-${i}`} className="grid-row">
                         {row.slice(0, 5).map((letter, j) => (
-                            <div key={j} className={`box ${letter ? 'filled' : ''}`} id={`box${i}${j}`}>
+                            <div key={`box-${i}-${j}`} className={`box ${letter ? 'filled' : ''}`} id={`box${i}${j}`}>
                                 {letter}
                             </div>
                         ))}
