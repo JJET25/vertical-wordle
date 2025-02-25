@@ -15,7 +15,7 @@ const Game = () => {
 
     const fetchWord = async () => {
         try {
-            const response = await fetch('http://localhost:5005/api/words/random');
+            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/words/random`);;
             console.log("Response from backend:", response);
             if (!response.ok) {
                 console.error(`HTTP error! status: ${response.status}`);
@@ -37,18 +37,18 @@ const Game = () => {
 
     const saveGameResult = async (won) => {
         try {
-        await fetch('http://localhost:5005/api/words/game', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                player: 'Guest',
-                word: state.secret,
-                attempts: state.currentRow + 1,
-                won
-            })
-        });
+            await fetch(`${import.meta.env.VITE_API_BASE_URL}/words/game`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    player: 'Guest',
+                    word: state.secret,
+                    attempts: state.currentRow + 1,
+                    won
+                })
+            });
         } catch (error) {
-            console.error('Error saving game result:', error);
+            // ...
         }
     };
 
@@ -99,7 +99,7 @@ const Game = () => {
         const row = state.currentRow;
 
         try {
-            const response = await fetch('http://localhost:5005/api/words/validate', {
+            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/words/validate`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ word: guess.toLowerCase() })
